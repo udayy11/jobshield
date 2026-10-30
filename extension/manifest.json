@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "JobShield AI — Job Fraud Risk Assessment",
+  "version": "1.0.0",
+  "description": "Cybersecurity-based AI and heuristic fraud risk assessment for job postings.",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:8000/*",
+    "http://localhost:8000/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

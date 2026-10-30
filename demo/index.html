@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JobShield AI — Demo Job Portal</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #131b2e;
+      --border: #1e293b;
+      --accent-blue: #38bdf8;
+      --accent-green: #22c55e;
+      --accent-red: #ef4444;
+      --accent-amber: #f59e0b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .logo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent-blue);
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: #334155;
+    }
+    .badge {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .badge-green { background: rgba(34, 197, 94, 0.15); color: var(--accent-green); border: 1px solid rgba(34, 197, 94, 0.3); }
+    .badge-red { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.3); }
+    .badge-amber { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); }
+    h2 { font-size: 1.25rem; margin-bottom: 8px; color: #fff; }
+    p.desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; }
+    .btn {
+      display: block;
+      text-align: center;
+      background: #1e293b;
+      color: #38bdf8;
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn:hover {
+      background: #38bdf8;
+      color: #0b0f19;
+    }
+    .instructions {
+      margin-top: 50px;
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+    .instructions h3 { margin-bottom: 10px; color: var(--accent-blue); font-size: 1.1rem; }
+    .instructions ol { padding-left: 20px; color: var(--text-muted); font-size: 0.95rem; }
+    .instructions li { margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo-badge">🛡️ JobShield AI Prototype</div>
+      <h1>Test Job Portal Demonstrator</h1>
+      <p class="subtitle">Use these fictional job postings to test both genuine patterns and deceptive recruitment schemes with the JobShield AI Chrome Extension.</p>
+    </header>
+
+    <div class="grid">
+      <!-- Job 1 -->
+      <div class="card">
+        <div>
+          <span class="badge badge-green">Genuine • Low Risk</span>
+          <h2>Senior Python Backend Engineer</h2>
+          <p class="desc">Enterprise SaaS role at CloudScale Technologies with formal requirements, corporate email, and market-standard salary.</p>
+        </div>
+        <a href="genuine_software_engineer.html" class="btn">View Job Posting &rarr;</a>
+      </div>
+
+      <!-- Job 2 -->
+      <div class="card">
+        <div>
+          <span class="badge badge-green">Genuine • Low Risk</span>
+          <h2>Junior Data Analyst</h2>
+          <p class="desc">Analytical role at Apex Market Intelligence with SQL/Python requirements, corporate careers portal link, and PTO benefits.</p>
+        </div>
+        <a href="genuine_data_analyst.html" class="btn">View Job Posting &rarr;</a>
+      </div>
+
+      <!-- Job 3 -->
+      <div class="card">
+        <div>
+          <span class="badge badge-red">Suspicious • High Risk</span>
+          <h2>WFH Data Entry (Instant Selection)</h2>
+          <p class="desc">Work-from-home scheme offering $6,000/month for 2 hrs/day, zero experience, instant hiring, and WhatsApp-only interview.</p>
+        </div>
+        <a href="suspicious_wfh_data_entry.html" class="btn">View Job Posting &rarr;</a>
+      </div>
+
+      <!-- Job 4 -->
+      <div class="card">
+        <div>
+          <span class="badge badge-red">Scam • Critical Risk</span>
+          <h2>Proofreading Specialist (Fee Scam)</h2>
+          <p class="desc">Demands a mandatory $150 refundable registration/training deposit before onboarding, with personal Gmail contact.</p>
+        </div>
+        <a href="scam_registration_fee.html" class="btn">View Job Posting &rarr;</a>
+      </div>
+
+      <!-- Job 5 -->
+      <div class="card">
+        <div>
+          <span class="badge badge-amber">Suspicious • Medium/High</span>
+          <h2>Online Assistant ($200/hr, No Skills)</h2>
+          <p class="desc">Claims $200 per hour with no qualifications, urgent limited vacancies, Telegram contact, and bit.ly application link.</p>
+        </div>
+        <a href="unrealistic_salary_no_exp.html" class="btn">View Job Posting &rarr;</a>
+      </div>
+    </div>
+
+    <div class="instructions">
+      <h3>🚀 How to test with the JobShield AI Chrome Extension:</h3>
+      <ol>
+        <li>Click any job posting card above to open the simulated job advertisement page.</li>
+        <li>Click the <strong>JobShield AI</strong> icon on the Chrome toolbar.</li>
+        <li>Click <strong>CHECK JOB RISK</strong> in the popup window.</li>
+        <li>Observe the real-time extraction, ML probability, Rule warnings, and Hybrid risk assessment score!</li>
+      </ol>
+    </div>
+  </div>
+</body>
+</html>
