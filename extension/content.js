@@ -228,25 +228,41 @@ function renderAssistantWidget(jobData) {
   const styleEl = document.createElement("style");
   styleEl.textContent = `
     #jobshield-widget-container * { box-sizing: border-box; margin: 0; padding: 0; }
-    .js-launcher-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: #0284c7;
-      color: #ffffff;
-      border: 1px solid #0369a1;
-      padding: 10px 18px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
-      transition: all 0.2s ease;
+    #jobshield-widget-container .js-launcher-btn {
+      all: initial;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 9px !important;
+      background: #0284c7 !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(0, 0, 0, 0.15) !important;
+      padding: 9px 18px !important;
+      border-radius: 10px !important;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.1px !important;
+      white-space: nowrap !important;
+      cursor: pointer !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+      transition: all 0.2s ease !important;
+      line-height: 1.2 !important;
+      box-sizing: border-box !important;
+      user-select: none !important;
     }
-    .js-launcher-btn:hover {
-      background: #0369a1;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(2, 132, 199, 0.45);
+    #jobshield-widget-container .js-launcher-btn:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25) !important;
+    }
+    #jobshield-widget-container .js-launcher-btn span {
+      display: inline-block !important;
+      color: #ffffff !important;
+      font-family: inherit !important;
+      font-size: inherit !important;
+      font-weight: inherit !important;
+      line-height: inherit !important;
+      white-space: nowrap !important;
     }
     .js-popup-card {
       width: 370px;
@@ -420,13 +436,17 @@ function renderAssistantWidget(jobData) {
     // Update Launcher Text
     launcher.innerHTML = `<span>🛡️</span><span>JobShield: ${riskLevel} (${data.risk_score}/100)</span>`;
     if (riskClass === "high") {
-      launcher.style.background = "#dc2626";
-      launcher.style.borderColor = "#b91c1c";
-      launcher.style.boxShadow = "0 4px 14px rgba(220, 38, 38, 0.35)";
+      launcher.style.setProperty("background", "#dc2626", "important");
+      launcher.style.setProperty("border-color", "#b91c1c", "important");
+      launcher.style.setProperty("box-shadow", "0 4px 16px rgba(220, 38, 38, 0.35)", "important");
     } else if (riskClass === "low") {
-      launcher.style.background = "#059669";
-      launcher.style.borderColor = "#047857";
-      launcher.style.boxShadow = "0 4px 14px rgba(5, 150, 105, 0.35)";
+      launcher.style.setProperty("background", "#059669", "important");
+      launcher.style.setProperty("border-color", "#047857", "important");
+      launcher.style.setProperty("box-shadow", "0 4px 16px rgba(5, 150, 105, 0.35)", "important");
+    } else if (riskClass === "medium") {
+      launcher.style.setProperty("background", "#d97706", "important");
+      launcher.style.setProperty("border-color", "#b45309", "important");
+      launcher.style.setProperty("box-shadow", "0 4px 16px rgba(217, 119, 6, 0.35)", "important");
     }
 
     // Create Popup Card
