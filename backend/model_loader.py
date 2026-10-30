@@ -3,13 +3,18 @@ import sys
 import joblib
 from typing import Dict, Any, Tuple, Optional
 
-# Ensure ml directory is on sys.path for preprocess imports
+# Ensure workspace root and ml directory are on sys.path for preprocess imports
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ML_DIR = os.path.join(BASE_DIR, "ml")
-if ML_DIR not in sys.path:
-    sys.path.insert(0, ML_DIR)
+for path in (BASE_DIR, ML_DIR):
+    if path not in sys.path:
+        sys.path.insert(0, path)
 
-from preprocess import combine_fields, clean_text
+try:
+    from ml.preprocess import combine_fields, clean_text
+except ImportError:
+    from preprocess import combine_fields, clean_text
+
 
 
 class ModelManager:
