@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # JobShield AI 🛡️
 ### A Cybersecurity-Based Browser Extension for Job Fraud Risk Assessment
 
@@ -279,3 +280,7 @@ In accordance with prototype time constraints and strict guidelines, the followi
 - WHOIS domain age lookup for recruiter email domains.
 - Advanced SHAP explainability visualizations.
 - Multi-language NLP support.
+=======
+# jobshield
+micro project
+>>>>>>> 76b370f8e79b4800c45fa9e3f06b95ee64ff8626
