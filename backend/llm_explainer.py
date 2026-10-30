@@ -20,7 +20,7 @@ class LLMThreatExplainer:
         
         # Groq configuration
         self.groq_endpoint = "https://api.groq.com/openai/v1/chat/completions"
-        self.groq_model = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+        self.groq_model = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
 
         # Gemini configuration (fallback)
         self.gemini_endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent"

@@ -1,29 +1,37 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <title>JobShield AI â€” Demo Job Portal</title>
+  <title>Global Careers Portal — Open Job Opportunities</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0b0f19;
-      --card-bg: #131b2e;
-      --border: #1e293b;
-      --accent-blue: #38bdf8;
-      --accent-green: #22c55e;
-      --accent-red: #ef4444;
-      --accent-amber: #f59e0b;
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-subtle: #f1f5f9;
+      --border: #e2e8f0;
+      --border-hover: #cbd5e1;
+      --primary: #0284c7;
+      --primary-hover: #0369a1;
+      --primary-subtle: #e0f2fe;
+      --primary-text: #0369a1;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: var(--bg);
-      color: var(--text);
+      color: var(--text-main);
       padding: 40px 20px;
-      line-height: 1.6;
+      line-height: 1.5;
     }
     .container {
       max-width: 960px;
@@ -31,168 +39,209 @@
     }
     header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
     }
-    .logo-badge {
+    .brand-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      color: var(--accent-blue);
-      padding: 6px 16px;
+      gap: 6px;
+      background: var(--primary-subtle);
+      border: 1px solid #bae6fd;
+      color: var(--primary-text);
+      padding: 4px 12px;
       border-radius: 9999px;
       font-weight: 600;
-      font-size: 0.85rem;
-      margin-bottom: 16px;
+      font-size: 0.8rem;
+      margin-bottom: 12px;
     }
     h1 {
-      font-size: 2.2rem;
-      margin-bottom: 12px;
-      background: linear-gradient(135deg, #38bdf8, #818cf8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
     }
     p.subtitle {
       color: var(--text-muted);
-      font-size: 1.05rem;
-      max-width: 650px;
+      font-size: 0.95rem;
+      max-width: 580px;
       margin: 0 auto;
     }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      gap: 16px;
+      margin-top: 24px;
     }
     .card {
-      background: var(--card-bg);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
+      border-radius: 10px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.2s, border-color 0.2s;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.15s ease-in-out;
     }
     .card:hover {
-      transform: translateY(-3px);
-      border-color: #334155;
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
     }
     .badge {
       display: inline-block;
       align-self: flex-start;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      margin-bottom: 14px;
-      text-transform: uppercase;
-    }
-    .badge-green { background: rgba(34, 197, 94, 0.15); color: var(--accent-green); border: 1px solid rgba(34, 197, 94, 0.3); }
-    .badge-red { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.3); }
-    .badge-amber { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); }
-    h2 { font-size: 1.25rem; margin-bottom: 8px; color: #fff; }
-    p.desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px; }
-    .btn {
-      display: block;
-      text-align: center;
-      background: #1e293b;
-      color: #38bdf8;
-      text-decoration: none;
-      padding: 10px 16px;
-      border-radius: 8px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
       font-weight: 600;
-      font-size: 0.9rem;
-      border: 1px solid rgba(56, 189, 248, 0.2);
-      transition: background 0.2s, color 0.2s;
+      margin-bottom: 12px;
+      background: var(--surface-subtle);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+    .company-name {
+      font-size: 0.82rem;
+      color: var(--primary);
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    p.desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.45;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--surface);
+      color: var(--primary);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      border: 1px solid #bae6fd;
+      transition: all 0.15s ease;
     }
     .btn:hover {
-      background: #38bdf8;
-      color: #0b0f19;
+      background: var(--primary-subtle);
+      border-color: var(--primary);
     }
     .instructions {
-      margin-top: 50px;
-      background: rgba(30, 41, 59, 0.5);
-      border: 1px dashed var(--border);
-      border-radius: 12px;
-      padding: 24px;
+      margin-top: 36px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      box-shadow: var(--shadow-sm);
     }
-    .instructions h3 { margin-bottom: 10px; color: var(--accent-blue); font-size: 1.1rem; }
-    .instructions ol { padding-left: 20px; color: var(--text-muted); font-size: 0.95rem; }
-    .instructions li { margin-bottom: 8px; }
+    .instructions h3 {
+      margin-bottom: 10px;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .instructions ol {
+      padding-left: 20px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+    .instructions li {
+      margin-bottom: 6px;
+    }
+    .instructions strong {
+      color: var(--text-main);
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <div class="logo-badge">ðŸ›¡ï¸ JobShield AI Prototype</div>
-      <h1>Test Job Portal Demonstrator</h1>
-      <p class="subtitle">Use these fictional job postings to test both genuine patterns and deceptive recruitment schemes with the JobShield AI Chrome Extension.</p>
+      <div class="brand-badge">🛡️ JobShield AI Verified Portal</div>
+      <h1>Global Careers Portal</h1>
+      <p class="subtitle">Explore active openings and test real-time fraud assessment using the JobShield AI Chrome Extension.</p>
     </header>
 
     <div class="grid">
       <!-- Job 1 -->
       <div class="card">
         <div>
-          <span class="badge badge-green">Genuine â€¢ Low Risk</span>
+          <span class="badge">Full-time • Hybrid</span>
           <h2>Senior Python Backend Engineer</h2>
-          <p class="desc">Enterprise SaaS role at CloudScale Technologies with formal requirements, corporate email, and market-standard salary.</p>
+          <div class="company-name">CloudScale Technologies Inc.</div>
+          <p class="desc">Enterprise SaaS role with microservices architecture, institutional corporate email, and competitive compensation.</p>
         </div>
-        <a href="genuine_software_engineer.html" class="btn">View Job Posting &rarr;</a>
+        <a href="genuine_software_engineer.html" class="btn">View Posting &rarr;</a>
       </div>
 
       <!-- Job 2 -->
       <div class="card">
         <div>
-          <span class="badge badge-green">Genuine â€¢ Low Risk</span>
+          <span class="badge">Full-time • On-site</span>
           <h2>Junior Data Analyst</h2>
-          <p class="desc">Analytical role at Apex Market Intelligence with SQL/Python requirements, corporate careers portal link, and PTO benefits.</p>
+          <div class="company-name">Apex Market Intelligence Ltd.</div>
+          <p class="desc">Analytical reporting role with SQL/Python requirements, corporate careers portal link, and full benefits.</p>
         </div>
-        <a href="genuine_data_analyst.html" class="btn">View Job Posting &rarr;</a>
+        <a href="genuine_data_analyst.html" class="btn">View Posting &rarr;</a>
       </div>
 
       <!-- Job 3 -->
       <div class="card">
         <div>
-          <span class="badge badge-red">Suspicious â€¢ High Risk</span>
-          <h2>WFH Data Entry (Instant Selection)</h2>
-          <p class="desc">Work-from-home scheme offering $6,000/month for 2 hrs/day, zero experience, instant hiring, and WhatsApp-only interview.</p>
+          <span class="badge">Remote • Flexible</span>
+          <h2>Work From Home Data Entry Clerk</h2>
+          <div class="company-name">Global Quick Earn Careers</div>
+          <p class="desc">Immediate-start typing role offering $6,000/month for 2 hrs/day with instant hiring and WhatsApp communication.</p>
         </div>
-        <a href="suspicious_wfh_data_entry.html" class="btn">View Job Posting &rarr;</a>
+        <a href="suspicious_wfh_data_entry.html" class="btn">View Posting &rarr;</a>
       </div>
 
       <!-- Job 4 -->
       <div class="card">
         <div>
-          <span class="badge badge-red">Scam â€¢ Critical Risk</span>
-          <h2>Proofreading Specialist (Fee Scam)</h2>
-          <p class="desc">Demands a mandatory $150 refundable registration/training deposit before onboarding, with personal Gmail contact.</p>
+          <span class="badge">Contract • Remote</span>
+          <h2>Online Proofreader & Document Typist</h2>
+          <div class="company-name">Apex Freelance Group</div>
+          <p class="desc">Home-based manuscript transcription role with deposit verification and Gmail recruitment contact.</p>
         </div>
-        <a href="scam_registration_fee.html" class="btn">View Job Posting &rarr;</a>
+        <a href="scam_registration_fee.html" class="btn">View Posting &rarr;</a>
       </div>
 
       <!-- Job 5 -->
       <div class="card">
         <div>
-          <span class="badge badge-amber">Suspicious â€¢ Medium/High</span>
-          <h2>Online Assistant ($200/hr, No Skills)</h2>
-          <p class="desc">Claims $200 per hour with no qualifications, urgent limited vacancies, Telegram contact, and bit.ly application link.</p>
+          <span class="badge">Part-time • Flexible</span>
+          <h2>VIP Online Business Assistant</h2>
+          <div class="company-name">Fast Fortune International</div>
+          <p class="desc">Promised $200 per hour with zero experience, immediate selection, and external application link.</p>
         </div>
-        <a href="unrealistic_salary_no_exp.html" class="btn">View Job Posting &rarr;</a>
+        <a href="unrealistic_salary_no_exp.html" class="btn">View Posting &rarr;</a>
       </div>
     </div>
 
     <div class="instructions">
-      <h3>ðŸš€ How to test with the JobShield AI Chrome Extension:</h3>
+      <h3>📋 How to test with the JobShield AI Extension:</h3>
       <ol>
-        <li>Click any job posting card above to open the simulated job advertisement page.</li>
-        <li>Click the <strong>JobShield AI</strong> icon on the Chrome toolbar.</li>
-        <li>Click <strong>CHECK JOB RISK</strong> in the popup window.</li>
-        <li>Observe the real-time extraction, ML probability, Rule warnings, and Hybrid risk assessment score!</li>
+        <li>Click <strong>View Posting &rarr;</strong> on any job card above.</li>
+        <li>The JobShield in-page assistant evaluates the job posting automatically.</li>
+        <li>You can also click the <strong>JobShield AI</strong> icon on the Chrome toolbar to inspect the full risk breakdown.</li>
       </ol>
     </div>
   </div>
 </body>
 </html>
-
