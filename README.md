@@ -70,18 +70,26 @@ Job Posting Webpage (LinkedIn, Indeed, Portal)
    - **Critical Overrides**: If Critical rules (R1 upfront fees, R2 credentials) trigger, the score is automatically floored at **≥ 75 (High Risk)** regardless of ML confidence.
    - **Insufficient Information Handling**: Postings with fewer than 12 words return `INSUFFICIENT_INFO` rather than false low-risk confidence.
 
-4. **FastAPI Backend Server (`backend/app.py`)**:
+4. **AI / LLM Threat Explainer (`backend/llm_explainer.py`)**:
+   - Integrates Google Gemini (`gemini-3.5-flash-lite`) for automated cyber threat intelligence briefings dissecting social engineering, psychological manipulation, and upfront fee patterns.
+   - Built-in contextual threat intelligence generator fallback if operating offline.
+
+5. **In-Page Popup Assistant (`extension/content.js`)**:
+   - Automatically detects job descriptions when navigating to any JD page (such as clicking "View Posting" on a job board).
+   - Injects a sleek, minimalist floating JobShield assistant widget that performs instant on-page risk analysis and slides out a detailed threat breakdown.
+
+6. **FastAPI Backend Server (`backend/app.py`)**:
    - `GET /health`: Returns service status, loaded model metadata, and training metrics.
-   - `POST /analyze`: Accepts extracted job attributes and returns comprehensive risk breakdown, warnings with evidence, positive signals, explanation, recommendations, and disclaimers.
+   - `POST /analyze`: Accepts extracted job attributes and returns comprehensive risk breakdown, warnings with evidence, positive signals, recommendations, disclaimers, and LLM threat intelligence.
    - Full CORS support for Chrome Extension communication.
    - Built-in static hosting for demo portal at `/demo`.
 
-5. **Chrome Manifest V3 Extension (`extension/`)**:
-   - Modern dark-mode cybersecurity user interface.
-   - One-click active tab DOM extraction with semantic fallbacks.
+7. **Chrome Manifest V3 Extension (`extension/`)**:
+   - Clean, modern light blue & white minimalist aesthetic.
+   - Automatic in-page assistant popup drawer on JD pages.
+   - Standard toolbar popup with color-coded risk meter, breakdown cards, and AI Threat Intelligence card.
    - Dynamic real-time backend status badge (Online / Degraded / Offline).
    - Safe DOM manipulation (prevents XSS vulnerabilities).
-   - Color-coded risk meter and component breakdown cards.
 
 6. **Interactive Demo Portal (`demo/`)**:
    - `index.html`: Portal dashboard with quick-launch links.

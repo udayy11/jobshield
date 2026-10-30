@@ -8,6 +8,7 @@ from pydantic import BaseModel, Field
 from model_loader import model_manager
 from rules import RuleEngine
 from scoring import HybridScoringEngine
+from llm_explainer import llm_explainer
 
 app = FastAPI(
     title="JobShield AI Backend",
@@ -34,6 +35,8 @@ class JobAnalysisRequest(BaseModel):
     description: Optional[str] = Field(default="", description="Job description / responsibilities")
     requirements: Optional[str] = Field(default="", description="Job requirements or skills")
     salary: Optional[str] = Field(default="", description="Salary range or compensation details")
+    location: Optional[str] = Field(default="", description="Job location")
+    job_type: Optional[str] = Field(default="", description="Employment type (Full-time, Contract, etc.)")
     recruiter_email: Optional[str] = Field(default="", description="Contact or recruiter email")
     application_link: Optional[str] = Field(default="", description="Application URL or portal link")
 
@@ -48,6 +51,8 @@ class JobAnalysisResponse(BaseModel):
     explanation: str
     recommendations: List[str]
     disclaimer: str
+    llm_explanation: Optional[str] = None
+    llm_source: Optional[str] = None
     detailed_warnings: Optional[List[Dict[str, Any]]] = None
     detailed_positive_signals: Optional[List[Dict[str, Any]]] = None
     extracted_summary: Optional[Dict[str, Any]] = None
@@ -119,13 +124,49 @@ def analyze_job(payload: JobAnalysisRequest):
         is_insufficient_info=is_insufficient
     )
 
+    # Step 4: AI / LLM Threat Explanation
+    llm_result = llm_explainer.explain(
+        job_data=job_data,
+        risk_level=assessment["risk_level"],
+        risk_score=assessment["risk_score"],
+        warnings=warnings,
+        positive_signals=positive_signals
+    )
+    assessment["llm_explanation"] = llm_result["explanation"]
+    assessment["llm_source"] = llm_result["source"]
+
+    location = (job_data.get("location") or "").strip()
+    job_type = (job_data.get("job_type") or "").strip()
+
+    # Determine company domain & legitimacy check
+    company_domain = ""
+    is_domain_verified = False
+    if recruiter_email and "@" in recruiter_email:
+        company_domain = recruiter_email.split("@")[-1].lower()
+    elif application_link and "://" in application_link:
+        try:
+            from urllib.parse import urlparse
+            company_domain = urlparse(application_link).netloc.lower()
+            if company_domain.startswith("www."):
+                company_domain = company_domain[4:]
+        except Exception:
+            pass
+
+    from rules import PERSONAL_EMAIL_DOMAINS, URL_SHORTENERS
+    if company_domain and company_domain not in PERSONAL_EMAIL_DOMAINS and company_domain not in URL_SHORTENERS and "." in company_domain:
+        is_domain_verified = True
+
     assessment["extracted_summary"] = {
-        "title": title[:60] if title else "(Not detected)",
-        "company": company[:50] if company else "(Not detected)",
-        "word_count": combined_words,
-        "has_salary": bool(salary),
-        "has_recruiter_email": bool(recruiter_email),
-        "has_application_link": bool(application_link)
+        "title": title or "Not specified",
+        "company": company or "Not specified",
+        "location": location or "Location not specified",
+        "salary": salary or "Not specified",
+        "job_type": job_type or "Full-time",
+        "recruiter_email": recruiter_email or "Not provided",
+        "application_link": application_link or "",
+        "company_domain": company_domain or "Not detected",
+        "is_domain_verified": is_domain_verified,
+        "word_count": combined_words
     }
 
     return assessment
